@@ -31,6 +31,7 @@ PROCESSED_DATA_DIR = PROJECT_ROOT / "data" / "processed"
 TABLES_DIR = PROJECT_ROOT / "outputs" / "tables"
 
 LONG_DATASET_PATH = PROCESSED_DATA_DIR / "long_dataset.csv"
+DEFAULT_RAW_CSV_NAME = "results.csv"
 
 
 # ---------------------------------------------------------------------------
@@ -113,6 +114,10 @@ def find_raw_csv(raw_csv_path: str | Path | None = None) -> Path:
         if not path.exists():
             raise FileNotFoundError(f"Raw CSV file does not exist: {path}")
         return path
+
+    default_csv_path = RAW_DATA_DIR / DEFAULT_RAW_CSV_NAME
+    if default_csv_path.exists():
+        return default_csv_path
 
     csv_files = sorted(RAW_DATA_DIR.glob("*.csv"))
 
